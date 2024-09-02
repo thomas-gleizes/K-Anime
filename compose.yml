@@ -1,0 +1,29 @@
+services:
+  webapp:
+    container_name: kanime_webapp
+    build:
+        context: .docker/webapp
+        dockerfile: Dockerfile
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/var/www/app
+    working_dir: /var/www/app
+    command: bash -c "pnpm install && pnpm dev"
+    depends_on:
+      - database
+
+  database:
+    container_name: kanime_database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+        - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:

@@ -1,0 +1,13 @@
+{
+  "name": "@kanime/types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.d.ts",
+  "types": "index.d.ts",
+  "scripts": {
+    "generate": "openapi-typescript ../kitsu.openapi.json -o ./lib/kitsu.d.ts && prettier --write ./lib/kitsu.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.3.3"
+  }
+}
